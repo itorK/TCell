@@ -1,5 +1,16 @@
 import * as express from "express";
-import {addDocument, getDocument, getDocuments} from "../controllers/documents";
+import {
+    addDocument,
+    addETHDoc,
+    getCountDocuments,
+    getDocument,
+    getDocuments,
+    getETHDoc,
+    getETHLastBlock,
+    getHistory,
+    verifyDocument,
+    verifyETHDoc
+} from "../controllers/documents";
 import {addLogin, getLogin, verifyLogin} from "../controllers/login";
 import * as multer from "multer";
 import * as path from "path";
@@ -15,16 +26,24 @@ export class Index {
 
         router.get("/", indexRoute.index);
         router.get("/documents/:clientid", getDocuments);
+        router.post("/documents/:clientid", getCountDocuments);
         router.post("/documents", upload.array("file"), addDocument);
         router.get("/document/:clientid/:hash", getDocument);
         router.post("/upload/text", upload.array("file"), addDocument);
+        router.post("/verify", upload.array("file"), verifyDocument);
 
+        router.get("/documenteth/:clientid/:docid", getETHDoc);
+        router.get("/getlastblock", getETHLastBlock);
 
+        router.post("/documenteth/:clientid/:docid/:hash", addETHDoc);
+
+        router.post("/verify/:clientid/:hash", verifyETHDoc);
         router.post("/login", addLogin);
         router.get("/login/:id", getLogin);
         router.post("/login/verify", verifyLogin);
 
         router.get("/apidoc", indexRoute.apidoc);
+        router.post("/gethistory", getHistory);
 
         return router;
     }
@@ -54,6 +73,7 @@ export class Index {
                     req.decoded = decoded;
                     next();
                 }
+
             });
 
         } else {

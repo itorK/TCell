@@ -2,13 +2,23 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="storagechain@10.151.64.164" uuid="0ec3e158-f246-44a8-a485-df06df572266">
-      <database-info product="PostgreSQL" version="9.4.14" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.1.1">
+      <database-info product="PostgreSQL" version="9.4.17" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.1.1">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>admin</user-name>
       <introspection-schemas>storagechain:public</introspection-schemas>
+    </data-source>
+    <data-source name="test@localhost" uuid="7d88fb6b-075b-4287-878e-2b0c76f2e8fe">
+      <database-info product="MySQL" version="10.3.8-MariaDB" jdbc-version="4.2" driver-name="MariaDB connector/J" driver-version="2.2.1">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>admin</user-name>
+      <introspection-schemas>*:information_schema</introspection-schemas>
     </data-source>
   </component>
 </project>

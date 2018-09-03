@@ -8,15 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const pg = require("pg");
-const config_1 = require("../config/config");
 exports.getLogin = (req, res) => __awaiter(this, void 0, void 0, function* () {
     try {
-        const pool = new pg.Pool(config_1.default);
-        const client = yield pool.connect();
-        const { rows } = yield client.query('SELECT * FROM login WHERE login_id= $1', [req.params.id]);
-        client.release();
-        res.status(200).send(rows);
+        /* const pool = new pg.Pool(config);
+         const client = await pool.connect();
+         const { rows } = await client.query('SELECT * FROM login WHERE login_id= $1',[req.params.id]);
+         client.release();
+         */
+        res.status(200);
     }
     catch (err) {
         res.status(400).json({
@@ -29,11 +28,11 @@ exports.addLogin = (req, res) => __awaiter(this, void 0, void 0, function* () {
     try {
         const { loginName, loginPasswd } = req.body;
         try {
-            const pool = new pg.Pool(config_1.default);
-            const client = yield pool.connect();
-            const { row } = yield client.query('INSERT INTO login( login_name, login_passwd) values($1, digest($2,"sha256"))', [loginName, loginPasswd]);
-            client.release();
-            res.status(200).send(row.id);
+            // const pool = new pg.Pool(config);
+            //   const client = await pool.connect();
+            //    const { row } = await client.query('INSERT INTO login( login_name, login_passwd) values($1, digest($2,"sha256"))',[ loginName, loginPasswd]);
+            //    client.release();
+            //   res.status(200).send(row.id);
         }
         catch (err) {
             res.status(400).json({
@@ -52,11 +51,11 @@ exports.addLogin = (req, res) => __awaiter(this, void 0, void 0, function* () {
 });
 exports.verifyLogin = (req, res) => __awaiter(this, void 0, void 0, function* () {
     try {
-        const pool = new pg.Pool(config_1.default);
-        const client = yield pool.connect();
-        const { rows } = yield client.query('SELECT * FROM login WHERE login_id= $1 and login_passwd=$2', [req.params.id, req.params.passwd]);
-        client.release();
-        res.status(200).send(rows);
+        //   const pool = new pg.Pool(config);
+        //   const client = await pool.connect();
+        //   const { rows } = await client.query('SELECT * FROM login WHERE login_id= $1 and login_passwd=$2',[req.params.id,req.params.passwd]);
+        //   client.release();
+        //   res.status(200).send(rows);
     }
     catch (err) {
         res.status(400).json({
